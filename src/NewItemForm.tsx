@@ -12,9 +12,9 @@ export const NewItemForm = ({ onAdd }: NewItemFormProps) => {
     return (
         <NewItemFormContainer>
             <NewItemInput ref={ inputRef } value={text} 
-            onChange= { e => setText(e.target.value)}>
+            onChange= { e => setText(e.target.value)} >
             </NewItemInput>
-            <NewItemButton onClick={() => onAdd(text)}>
+            <NewItemButton onClick={() => onAdd(text)} disabled= { text.trim() === ''} >
                Create
             </NewItemButton>
         </NewItemFormContainer>
