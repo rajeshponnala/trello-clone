@@ -1,8 +1,9 @@
-import React from 'react'
+import React,{ useRef } from 'react'
 import { ColumnContainer, ColumnTitle} from './styles'
 import { AddNewItem } from './AddNewItem'
 import { useAppState } from './AppStateContext'
 import { Card } from './Card'
+import { useItemDrag } from './useItemDrag'
 
 interface ColumnProps {
     text: string
@@ -12,8 +13,13 @@ interface ColumnProps {
 
 export const Column = ({ text, index, id }: ColumnProps) => {
     const { state, dispatch } = useAppState()
+    const ref = useRef<HTMLDivElement>(null)
+
+    const { drag } = useItemDrag({ type: "COLUMN", id,index,text})
     
-    return <ColumnContainer>
+     drag(ref)
+    
+    return <ColumnContainer ref={ref}>
       <ColumnTitle>{text}</ColumnTitle>
        {
            state.lists[index].tasks.map( task =>
